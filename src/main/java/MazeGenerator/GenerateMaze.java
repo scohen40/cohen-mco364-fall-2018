@@ -31,18 +31,21 @@ public class GenerateMaze {
 //            visited = new ArrayList<>();
             maze = new int[height][width];
             maze = generateMaze();
+            printMaze();
+        }
+    }
+
+    public void printMaze() {
+        for (int i = 0; i < height; i++) {
+            System.out.println();
+            for (int j = 0; j < width; j++) {
+                System.out.print(maze[i][j]);
+            }
         }
     }
 
     public boolean isOdd(int height, int width) {
-        boolean isOdd;
-        if((height % 2 != 0) && (width % 2 != 0)){
-            isOdd = true;
-        }
-        else {
-            isOdd = false;
-        }
-        return isOdd;
+        return (height % 2 != 0) && (width % 2 != 0);
     }
 
     public int[][] generateMaze() {

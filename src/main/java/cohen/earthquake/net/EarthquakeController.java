@@ -1,8 +1,9 @@
 package cohen.earthquake.net;
 
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
 import java.util.Comparator;
-import java.util.Optional;
+//import java.util.Optional;
+import java.util.List;
 import java.util.stream.Collector;
 
 import javax.swing.text.JTextComponent;
@@ -11,7 +12,7 @@ import com.google.inject.Inject;
 
 import cohen.earthquake.Earthquake;
 import cohen.earthquake.EarthquakeFeedModel;
-import cohen.earthquake.EarthquakeProperties;
+//import cohen.earthquake.EarthquakeProperties;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

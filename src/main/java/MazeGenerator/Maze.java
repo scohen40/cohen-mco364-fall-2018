@@ -48,11 +48,12 @@ public class Maze {
      * @param m the generated maze
      */
     public static void getMaze(int[][] m) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                maze[i][j] = m[i][j];
-            }
-        }
+        maze = m;
+//        for (int i = 0; i < height; i++) {
+//            for (int j = 0; j < width; j++) {
+//                maze[i][j] = m[i][j];
+//            }
+//        }
     }
 
     /**
