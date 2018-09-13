@@ -1,5 +1,5 @@
-package cohen.MazeGenerator;
-
-public class Maze {
-
-}
+//package cohen.MazeGenerator;
+//
+//public class Maze {
+//
+//}

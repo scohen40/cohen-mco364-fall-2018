@@ -1,8 +1,8 @@
-package cohen.MazeGenerator;
-
-enum Direction {
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN
-}
+//package cohen.MazeGenerator;
+//
+////enum Direction {
+////    LEFT,
+//    RIGHT,
+//    UP,
+//    DOWN
+//}
