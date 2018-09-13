@@ -1,4 +1,4 @@
-package cohen.earthquake.lasthighest;
-
-public class LastHighestModule {
-}
+//package cohen.earthquake.lasthighest;
+//
+//public class LastHighestModule {
+//}
