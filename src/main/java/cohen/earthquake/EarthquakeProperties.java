@@ -4,7 +4,7 @@ public class EarthquakeProperties {
 	private double mag;
 	private String place;
 	private long time;
-	
+
 	public EarthquakeProperties(double mag, String place, long time) {
 		this.mag = mag;
 		this.place = place;

@@ -38,15 +38,15 @@ public class EarthquakeView extends JFrame{
 	private JFormattedTextField hourMagText = new JFormattedTextField();
 	private JFormattedTextField hourPlaceText = new JFormattedTextField();
 
-	
-	
+
+
 	public EarthquakeView() throws IOException {
 		setTitle("Greatest Earthquake Viewer");
 		setSize(800, 600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		
-		
+
+
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1,2));
 		JPanel results = new JPanel();
@@ -54,7 +54,7 @@ public class EarthquakeView extends JFrame{
 
 		panel.add(refresh);
 		panel.add(results);
-		
+
 		results.add(magLabel);
 		results.add(monthMagText);
 		results.add(placeLabel);
@@ -72,23 +72,23 @@ public class EarthquakeView extends JFrame{
 		results.add(placeLabel4);
 		results.add(hourPlaceText);
 
-	
+
 		refresh.addActionListener(this::refreshFields);
-		
+
 		add(panel);
-		
+
 	}
-	
+
 	public void refreshFields(ActionEvent event) {
 //		controller.refreshData();
 	}
-	
+
 	public JFormattedTextField getMonthMagText() {
 		return monthMagText;
 	}
 	public JFormattedTextField getMonthPlaceText() {
 		return monthPlaceText;
-	}	
+	}
 	public JFormattedTextField getWeekMagText() {
 		return weekMagText;
 	}
@@ -107,28 +107,28 @@ public class EarthquakeView extends JFrame{
 	public JFormattedTextField getHourPlaceText() {
 		return hourPlaceText;
 	}
-		
-	public static void main(String[] args) throws IOException {	
-		//Instead of creating the dependencies inside the class, create it outside 
-		//use Guice to create objects and wire them together. 
+
+	public static void main(String[] args) throws IOException {
+		//Instead of creating the dependencies inside the class, create it outside
+		//use Guice to create objects and wire them together.
 
 		//the injector creates the view and the controller for me and automatically wires it up
-		//to my retrofit and service as described in the EarthquakeModule. 
+		//to my retrofit and service as described in the EarthquakeModule.
 		Injector injector = Guice.createInjector(new EarthquakeModule());
-		
+
 		EarthquakeView view = injector.getInstance(EarthquakeView.class);
-		//put in @Singleton before the EarthquakeView name up top in order to make sure there is only one view, because controller also has a view as a member. 
-		//So we create 2 views and it doesn't work without the implementation of the Singleton Design Pattern 
+		//put in @Singleton before the EarthquakeView name up top in order to make sure there is only one view, because controller also has a view as a member.
+		//So we create 2 views and it doesn't work without the implementation of the Singleton Design Pattern
 		EarthquakeController controller = injector.getInstance(EarthquakeController.class);
-		
+
 		controller.refreshData();
-		
-		view.setVisible(true);	
+
+		view.setVisible(true);
 	}
-	
-	
+
+
 }
-	
+
 
 
 
