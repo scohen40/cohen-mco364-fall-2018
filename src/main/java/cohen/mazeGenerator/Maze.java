@@ -135,12 +135,18 @@ public class Maze {
      */
     public void printMaze() {
         for (int i = 0; i < height; i++) {
+            System.out.print(" _");
+        }
+        for (int i = 0; i < height; i++) {
             System.out.println();
             for (int j = 0; j < width; j++) {
-                Cell current = new Cell(i, j);
+                Cell current = maze[i][j];
                 StringBuilder string = new StringBuilder();
                 if(current.isWestWall()){
                     string.append("|");
+                }
+                else {
+                    string.append(" ");
                 }
                 if(current.isSouthWall()) {
                     string.append("_");
@@ -149,6 +155,7 @@ public class Maze {
                     string.append(" ");
                 }
                 System.out.print(string);
+//                System.out.print("|");
             }
         }
     }
