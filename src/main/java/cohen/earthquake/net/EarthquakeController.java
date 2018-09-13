@@ -1,9 +1,7 @@
 package cohen.earthquake.net;
 
-import java.awt.event.ActionEvent;
 import java.util.Comparator;
 import java.util.Optional;
-import java.util.stream.Collector;
 
 import javax.swing.text.JTextComponent;
 
@@ -11,7 +9,6 @@ import com.google.inject.Inject;
 
 import cohen.earthquake.Earthquake;
 import cohen.earthquake.EarthquakeFeedModel;
-import cohen.earthquake.EarthquakeProperties;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,11 +80,9 @@ public class EarthquakeController {
 			JTextComponent placeField,
 			EarthquakeFeedModel feed) 
 	{
-		List<Earthquake> earthquakes = feed.getFeatures().stream()
-				.filter(earthquake -> earthquake.getProperties().getMag() >= 3)
-				.sorted(Comparator.comparing(Earthquake::getMagnitude).reversed())
-				.limit(5)
-				.collect(Collector.toList());
+
+		Optional<Earthquake> largest = feed.getFeatures().stream()
+				.max(Comparator.comparing(e -> e.getProperties().getMag()));
 		
 		magnitudeField.setText(String.valueOf(largest.get().getProperties().getMag()));
 		placeField.setText(String.valueOf(largest.get().getProperties().getPlace()));
