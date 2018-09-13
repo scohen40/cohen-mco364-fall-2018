@@ -7,11 +7,7 @@ selected neighbor:
     If that neighbor hasn't been visited, remove the wall between this cell and that neighbor, and then recurse with that
     neighbor as the current cell.
  */
-package mazeGenerator;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+package cohen.mazeGenerator;
 
 public class GenerateMaze {
 

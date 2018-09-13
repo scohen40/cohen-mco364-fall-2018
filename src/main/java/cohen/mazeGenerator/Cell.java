@@ -1,4 +1,4 @@
-package mazeGenerator;
+package cohen.mazeGenerator;
 
 public class Cell {
     //coordinates

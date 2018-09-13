@@ -1,4 +1,4 @@
-package mazeGenerator;
+package cohen.mazeGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
