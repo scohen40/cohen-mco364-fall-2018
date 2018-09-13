@@ -42,15 +42,19 @@ public class Maze {
      */
     private void generatePath() {
         //Find the starting point to start digging.
-        Random rand = new Random();
-        int row = rand.nextInt(height);
-        int col = rand.nextInt(width);
+        Random x = new Random();
+        int row = x.nextInt(height);
+        Random y = new Random();
+        int col = y.nextInt(width);
 
         //starting cell
         maze[row][col].setVisited(true);
 
         //start digging the path
+
         dig(row, col);
+
+
 
     }
 
