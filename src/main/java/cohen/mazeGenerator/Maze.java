@@ -67,7 +67,7 @@ public class Maze {
             switch (randDirs[i]) {
                 case 1: //Up
                     //whether one cells up is in the maze or not
-                    if (row - 1 <= 0) {
+                    if (row - 1 < 0) {
                         continue;
                     }
                     //whether one cells up has been visited
@@ -80,7 +80,7 @@ public class Maze {
                     break;
                 case 2: //Right
                     //whether one cells right is in the maze or not
-                    if (column + 1 >= width - 1) { //alternative: (column + 2 >= width - 1) ??
+                    if (column + 1 > width - 1) { //alternative: (column + 2 >= width - 1) ??
                         continue;
                     }
                     //whether one cells right has been visited
@@ -93,7 +93,7 @@ public class Maze {
                     break;
                 case 3: //Down
                     //whether one cells down is in the maze or not
-                    if (row + 1 >= height - 1) {//alternative: (row + 2 >= height - 1) ??
+                    if (row + 1 > height - 1) {//alternative: (row + 2 >= height - 1) ??
                         continue;
                     }
                     //whether one cells down has been visited
@@ -106,7 +106,7 @@ public class Maze {
                     break;
                 case 4: //Left
                     //whether one cells left is in the maze or not
-                    if (column - 1 <= 0) {
+                    if (column - 1 < 0) {
                         continue;
                     }
                     //whether one cells left has been visited
@@ -142,7 +142,7 @@ public class Maze {
             System.out.print(" _");
         }
         for (int i = 0; i < height; i++) {
-            System.out.println();
+            System.out.println("|");
             for (int j = 0; j < width; j++) {
                 Cell current = maze[i][j];
                 StringBuilder string = new StringBuilder();
