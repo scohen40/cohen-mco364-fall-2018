@@ -9,6 +9,10 @@ public class Maze {
     private int height;
     private int width;
     private Random random;
+    private final int NORTH = 1;
+    private final int EAST = 2;
+    private final int SOUTH = 3;
+    private final int WEST = 4;
 
     //generate the full 2d array of cell objects. all the 'visited's are false and all the walls are true(that's done in the cells constructor).
     public Maze(int height, int width) {
@@ -64,7 +68,7 @@ public class Maze {
 //        for(int i = 0; i < randDirs.length;i++) {
         for(int i : randDirs) {
             switch (i) {
-                case 1: //Up
+                case NORTH: //Up
                     //whether one cells up is in the maze or not
                     if (row == 0) {
                         continue;
@@ -77,7 +81,7 @@ public class Maze {
                         dig(row - 1, column);
                     }
                     break;
-                case 2: //Right
+                case EAST: //Right
                     //whether one cells right is in the maze or not
                     if (column + 1 > width - 1) { //alternative: (column + 2 >= width - 1) ??
                         continue;
@@ -90,7 +94,7 @@ public class Maze {
                         dig(row, column + 1);
                     }
                     break;
-                case 3: //Down
+                case SOUTH: //Down
                     //whether one cells down is in the maze or not
                     if (row + 1 > height - 1) {//alternative: (row + 2 >= height - 1) ??
                         continue;
@@ -103,7 +107,7 @@ public class Maze {
                         dig(row + 1, column);
                     }
                     break;
-                case 4: //Left
+                case WEST: //Left
                     //whether one cells left is in the maze or not
                     if (column == 0) {
                         continue;
