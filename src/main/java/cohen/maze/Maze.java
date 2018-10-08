@@ -8,13 +8,14 @@ public class Maze {
     private Cell[][] maze;
     private int height;
     private int width;
+    private Random random;
 
     //generate the full 2d array of cell objects. all the 'visited's are false and all the walls are true(that's done in the cells constructor).
     public Maze(int height, int width) {
         //initialize the number of rows and columns in the maze with the numbers entered
         this.height = height;
         this.width = width;
-
+        random = new Random();
         //initialize the 2d maze with the number of spaces allocated by the height and width entered
         maze = new Cell[height][width];
         //fill the maze with cells
@@ -41,10 +42,8 @@ public class Maze {
      */
     private void generatePath() {
         //Find the starting point to start digging.
-        Random x = new Random();
-        int row = x.nextInt(height);
-        Random y = new Random();
-        int col = y.nextInt(width);
+        int row = random.nextInt(height);
+        int col = random.nextInt(width);
 
         //starting cell
         maze[row][col].setVisited(true);
@@ -66,7 +65,7 @@ public class Maze {
             switch (randDirs[i]) {
                 case 1: //Up
                     //whether one cells up is in the maze or not
-                    if (row - 1 < 0) {
+                    if (row == 0) {
                         continue;
                     }
                     //whether one cells up has been visited
@@ -105,7 +104,7 @@ public class Maze {
                     break;
                 case 4: //Left
                     //whether one cells left is in the maze or not
-                    if (column - 1 < 0) {
+                    if (column == 0) {
                         continue;
                     }
                     //whether one cells left has been visited
