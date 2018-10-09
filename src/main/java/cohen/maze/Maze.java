@@ -26,8 +26,8 @@ public class Maze {
         generateMaze();
         //dig a an open path through the maze
         generatePath();
-//        //print the maze in the console
-//        printMaze();
+        //print the maze in the console
+        printMaze();
     }
 
     /**
@@ -55,7 +55,10 @@ public class Maze {
         //start digging the path
 
         dig(row, col);
-
+        maze[0][0].setNorthWall(false);
+        maze[0][0].setWestWall(false);
+        maze[6][6].setEastWall(false);
+        maze[6][6].setSouthWall(false);
 
 
     }
@@ -162,9 +165,19 @@ public class Maze {
                     string.append(" ");
                 }
                 System.out.print(string);
-//                System.out.print("|");
             }
         }
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Cell[][] getMaze() {
+        return maze;
+    }
 }
