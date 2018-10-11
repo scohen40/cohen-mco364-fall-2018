@@ -30,7 +30,7 @@ public class AnimatedMaze extends JComponent {
     }
 
     /**
-     * The paintMaze() method runs through the generated maze and paints the existing walls.
+     * The paintMaze() method                runs through the generated maze and paints the existing walls.
      * @param g
      */
     void paintMaze(Graphics g) {
@@ -40,19 +40,19 @@ public class AnimatedMaze extends JComponent {
                 Cell current = maze.getMaze()[x][y];
                 if(current.isWestWall()) {
                     g.setColor(Color.black);
-                    g.drawLine((x+1)*seventhHeight, y*seventhHeight, (x+1)*seventhHeight, y*seventhHeight + seventhHeight);
+                    g.drawLine((y+1)*seventhHeight, x*seventhHeight, (y+1)*seventhHeight, x*seventhHeight + seventhHeight);
                 }
 
                 if(current.isNorthWall()){
-                    g.drawLine((x+1)*seventhHeight, y*seventhHeight,(x+1)*seventhHeight + seventhHeight, y*seventhHeight);
+                    g.drawLine((y+1)*seventhHeight, x*seventhHeight,(y+1)*seventhHeight + seventhHeight, x*seventhHeight);
                 }
 
                 if(current.isEastWall()) {
-                    g.drawLine((x+1)*seventhHeight + seventhHeight, y*seventhHeight, (x+1)*seventhHeight + seventhHeight, y*seventhHeight + seventhHeight);
+                    g.drawLine((y+1)*seventhHeight + seventhHeight, x*seventhHeight, (y+1)*seventhHeight + seventhHeight, x*seventhHeight + seventhHeight);
                 }
 
                 if(current.isSouthWall()) {
-                    g.drawLine((x+1)*seventhHeight, y*seventhHeight + seventhHeight, (x+1)*seventhHeight + seventhHeight, y*seventhHeight +seventhHeight);
+                    g.drawLine((y+1)*seventhHeight, x*seventhHeight + seventhHeight, (y+1)*seventhHeight + seventhHeight, x*seventhHeight +seventhHeight);
                 }
 
             }
