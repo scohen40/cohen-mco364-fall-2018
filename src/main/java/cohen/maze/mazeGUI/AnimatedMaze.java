@@ -42,31 +42,19 @@ public class AnimatedMaze extends JComponent {
                     g.setColor(Color.black);
                     g.drawLine((x+1)*seventhHeight, y*seventhHeight, (x+1)*seventhHeight, y*seventhHeight + seventhHeight);
                 }
-//                else{
-//                    g.setColor(Color.WHITE);
-//                    g.drawLine(x*seventhHeight, y*seventhHeight, x*seventhHeight, y*seventhHeight + seventhHeight);
-//                }
+
                 if(current.isNorthWall()){
                     g.drawLine((x+1)*seventhHeight, y*seventhHeight,(x+1)*seventhHeight + seventhHeight, y*seventhHeight);
                 }
-//                else{
-//                    g.setColor(Color.WHITE);
-//                    g.drawLine(x*seventhHeight, y*seventhHeight,x*seventhHeight + seventhHeight, y*seventhHeight);
-//                }
+
                 if(current.isEastWall()) {
                     g.drawLine((x+1)*seventhHeight + seventhHeight, y*seventhHeight, (x+1)*seventhHeight + seventhHeight, y*seventhHeight + seventhHeight);
                 }
-//                else{
-//                    g.setColor(Color.WHITE);
-//                    g.drawLine(x*seventhHeight + seventhHeight, y*seventhHeight, x*seventhHeight + seventhHeight, y*seventhHeight + seventhHeight);
-//                }
+
                 if(current.isSouthWall()) {
                     g.drawLine((x+1)*seventhHeight, y*seventhHeight + seventhHeight, (x+1)*seventhHeight + seventhHeight, y*seventhHeight +seventhHeight);
                 }
-//                else{
-//                    g.setColor(Color.WHITE);
-//                    g.drawLine(x*seventhHeight, y*seventhHeight + seventhHeight, x*seventhHeight + seventhHeight, y*seventhHeight +seventhHeight);
-//                }
+
             }
         }
     }

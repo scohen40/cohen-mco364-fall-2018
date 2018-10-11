@@ -68,7 +68,6 @@ public class Maze {
         //generate four random directions
         Integer[] randDirs = generateRandomDirections();
         //examine each direction
-//        for(int i = 0; i < randDirs.length;i++) {
         for (int i : randDirs) {
             switch (i) {
                 case NORTH: //Up
