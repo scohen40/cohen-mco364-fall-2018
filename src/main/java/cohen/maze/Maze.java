@@ -34,8 +34,8 @@ public class Maze {
      * The generateMaze method fills the maze with unvisited, walled cells.
      */
     public void generateMaze() {
-        for(int i = 0; i < height; i++) {
-            for(int j = 0; j < width; j++) {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
                 maze[i][j] = new Cell(i, j);
             }
         }
@@ -64,12 +64,12 @@ public class Maze {
     }
 
     //Depth-First Searching Algorithm that digs in increments of 1
-    public void dig(int row, int column){
+    public void dig(int row, int column) {
         //generate four random directions
         Integer[] randDirs = generateRandomDirections();
         //examine each direction
 //        for(int i = 0; i < randDirs.length;i++) {
-        for(int i : randDirs) {
+        for (int i : randDirs) {
             switch (i) {
                 case NORTH: //Up
                     //whether one cells up is in the maze or not
@@ -86,7 +86,7 @@ public class Maze {
                     break;
                 case EAST: //Right
                     //whether one cells right is in the maze or not
-                    if (column + 1 > width - 1) { //alternative: (column + 2 >= width - 1) ??
+                    if (column + 1 > width - 1) {
                         continue;
                     }
                     //whether one cells right has been visited
@@ -99,7 +99,7 @@ public class Maze {
                     break;
                 case SOUTH: //Down
                     //whether one cells down is in the maze or not
-                    if (row + 1 > height - 1) {//alternative: (row + 2 >= height - 1) ??
+                    if (row + 1 > height - 1) {
                         continue;
                     }
                     //whether one cells down has been visited
@@ -129,11 +129,12 @@ public class Maze {
 
     /**
      * The generateRandomDirections() class generates an array with random directions 1-4
+     *
      * @return Array containing 4 directions in random order
      */
     public Integer[] generateRandomDirections() {
         ArrayList<Integer> randoms = new ArrayList<>();
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             randoms.add(i + 1);
         }
         Collections.shuffle(randoms);
@@ -152,16 +153,14 @@ public class Maze {
             for (int j = 0; j < width; j++) {
                 Cell current = maze[i][j];
                 StringBuilder string = new StringBuilder();
-                if(current.isWestWall()){
+                if (current.isWestWall()) {
                     string.append("|");
-                }
-                else {
+                } else {
                     string.append(" ");
                 }
-                if(current.isSouthWall()) {
+                if (current.isSouthWall()) {
                     string.append("_");
-                }
-                else{
+                } else {
                     string.append(" ");
                 }
                 System.out.print(string);

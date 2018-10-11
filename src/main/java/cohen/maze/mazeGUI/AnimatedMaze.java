@@ -39,18 +39,34 @@ public class AnimatedMaze extends JComponent {
             for (int y = 0; y < maze.getWidth(); y++) {
                 Cell current = maze.getMaze()[x][y];
                 if(current.isWestWall()) {
-                    g.drawLine(x, y, x, y + seventhHeight);
+                    g.setColor(Color.black);
+                    g.drawLine(x*seventhHeight, y*seventhHeight, x*seventhHeight, y*seventhHeight + seventhHeight);
                 }
+//                else{
+//                    g.setColor(Color.WHITE);
+//                    g.drawLine(x*seventhHeight, y*seventhHeight, x*seventhHeight, y*seventhHeight + seventhHeight);
+//                }
                 if(current.isNorthWall()){
-                    g.drawLine(x, y,x + seventhWidth, y);
+                    g.drawLine(x*seventhHeight, y*seventhHeight,x*seventhHeight + seventhHeight, y*seventhHeight);
                 }
+//                else{
+//                    g.setColor(Color.WHITE);
+//                    g.drawLine(x*seventhHeight, y*seventhHeight,x*seventhHeight + seventhHeight, y*seventhHeight);
+//                }
                 if(current.isEastWall()) {
-                    g.drawLine(x + seventhWidth, y, x+ seventhWidth, y + seventhHeight);
+                    g.drawLine(x*seventhHeight + seventhHeight, y*seventhHeight, x*seventhHeight + seventhHeight, y*seventhHeight + seventhHeight);
                 }
+//                else{
+//                    g.setColor(Color.WHITE);
+//                    g.drawLine(x*seventhHeight + seventhHeight, y*seventhHeight, x*seventhHeight + seventhHeight, y*seventhHeight + seventhHeight);
+//                }
                 if(current.isSouthWall()) {
-                    g.drawLine(x, y + seventhHeight, x + seventhWidth, y +seventhHeight);
+                    g.drawLine(x*seventhHeight, y*seventhHeight + seventhHeight, x*seventhHeight + seventhHeight, y*seventhHeight +seventhHeight);
                 }
-
+//                else{
+//                    g.setColor(Color.WHITE);
+//                    g.drawLine(x*seventhHeight, y*seventhHeight + seventhHeight, x*seventhHeight + seventhHeight, y*seventhHeight +seventhHeight);
+//                }
             }
         }
     }
