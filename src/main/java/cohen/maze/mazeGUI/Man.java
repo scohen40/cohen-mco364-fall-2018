@@ -21,10 +21,10 @@ public class Man {
     //if the man isn't standing on the last cell, move forward. if not the game is over.
     public boolean isFinished() {
         if(row == height && column == width) {
-            return false;
+            return true;
         }
         else {
-            return true;
+            return false;
         }
     }
 

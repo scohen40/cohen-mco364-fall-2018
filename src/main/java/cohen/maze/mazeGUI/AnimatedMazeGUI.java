@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 public class AnimatedMazeGUI extends JFrame {
     private AnimatedMaze animatedMaze;
     private Maze maze;
-
+    private Man man;
     public AnimatedMazeGUI() {
         setTitle("Animated Maze Viewer");
         setSize(800, 600);
@@ -20,8 +20,8 @@ public class AnimatedMazeGUI extends JFrame {
         panel.setLayout(new BorderLayout());
 
         maze = new Maze(7, 7);
-        ;
-        animatedMaze = new AnimatedMaze(maze);
+        man = new Man(7, 7);
+        animatedMaze = new AnimatedMaze(maze, man);
         panel.add(animatedMaze, BorderLayout.CENTER);
 
         addKeyListener(new MyKeyAdapter());
@@ -31,8 +31,10 @@ public class AnimatedMazeGUI extends JFrame {
     }
 
     private class MyKeyAdapter extends KeyAdapter {
+
         @Override
         public void keyPressed(KeyEvent keyEvent) {
+            System.out.println("key detected");
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
                 //set man direction
                 getAnimatedMaze().getMan().setDirection(Direction.LEFT);
@@ -61,12 +63,12 @@ public class AnimatedMazeGUI extends JFrame {
     public void advanceMan() {
         if (!animatedMaze.getMan().isFinished()) {
             Direction direction = animatedMaze.getMan().getDirection();
-            int row = animatedMaze.getMan().getRow();
-            int column = animatedMaze.getMan().getColumn();
+            int row = animatedMaze.getMan().getRow()-1;
+            int column = animatedMaze.getMan().getColumn()-1;
 
             switch (direction) {
                 case UP:
-                    if (animatedMaze.getMan().getRow() == 1) {
+                    if (animatedMaze.getMan().getRow() == 0) {
                         break;
                     }
                     if (!maze.getMaze()[row][column].isNorthWall()) {
@@ -77,7 +79,7 @@ public class AnimatedMazeGUI extends JFrame {
                     }
 
                 case RIGHT:
-                    if (animatedMaze.getMan().getColumn() > animatedMaze.getWidth() - 1) {
+                    if (animatedMaze.getMan().getColumn() + 1 > animatedMaze.getWidth() - 1) {
                         break;
                     }
                     if (!maze.getMaze()[row][column].isEastWall()) {
@@ -87,7 +89,7 @@ public class AnimatedMazeGUI extends JFrame {
                         animatedMaze.repaint();                    }
 
                 case DOWN:
-                    if (animatedMaze.getMan().getRow() > animatedMaze.getHeight() - 1) {
+                    if (animatedMaze.getMan().getRow() + 1 > animatedMaze.getHeight() - 1) {
                         break;
                     }
                     if (!maze.getMaze()[row][column].isSouthWall()) {
@@ -98,7 +100,7 @@ public class AnimatedMazeGUI extends JFrame {
                     }
 
                 case LEFT:
-                    if (animatedMaze.getMan().getColumn() == 1) {
+                    if (animatedMaze.getMan().getColumn() == 0) {
                         break;
                     }
                     if (!maze.getMaze()[row][column].isWestWall()) {
@@ -110,11 +112,6 @@ public class AnimatedMazeGUI extends JFrame {
 
             }
 
-
-            //then either repaint the whole thing or just the man.
-            while (true) {
-//            animatedMaze.paintMan();
-            }
 
         }
 

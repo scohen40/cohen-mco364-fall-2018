@@ -16,9 +16,9 @@ public class AnimatedMaze extends JComponent {
     private int seventhHeight;
 
 
-    public AnimatedMaze(Maze maze) {
+    public AnimatedMaze(Maze maze, Man man) {
         this.maze = maze;
-        man = new Man(maze.getHeight(), maze.getWidth());
+        this.man = man;
     }
 
     protected void paintComponent(Graphics g) {
@@ -71,13 +71,11 @@ public class AnimatedMaze extends JComponent {
             }
 
         }
-        g.drawOval(man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight -(seventhHeight/2), 20, 20);
-        paintMan(g);
     }
 
     //draw man here or in the paint maze method, and just repaint the whole thing when a key is pressed?
     void paintMan(Graphics g) {
-        g.drawOval(man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight -(seventhHeight/2), 20, 20);
+        g.drawOval(man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight - (seventhHeight/2), 20, 20);
     }
 
     public Man getMan() {
