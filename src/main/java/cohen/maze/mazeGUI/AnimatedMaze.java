@@ -3,9 +3,12 @@ package cohen.maze.mazeGUI;
 import cohen.maze.Cell;
 import cohen.maze.Maze;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class AnimatedMaze extends JComponent {
@@ -23,11 +26,11 @@ public class AnimatedMaze extends JComponent {
 
     protected void paintComponent(Graphics g) {
         //having trouble loading.
-//        try {
-//            manImage = ImageIO.read(new File("shortMan.png"));
-//        } catch (IOException e) {
-//            System.out.println("man image for search button could not be loaded. contact system admin.");
-//        }
+        try {
+            manImage = ImageIO.read(new File("src/images/shortMan.png"));
+        } catch (IOException e) {
+            System.out.println("man image for search button could not be loaded. contact system admin.");
+        }
 
 
         super.paintComponent(g);
@@ -73,9 +76,9 @@ public class AnimatedMaze extends JComponent {
         }
     }
 
-    //draw man here or in the paint maze method, and just repaint the whole thing when a key is pressed?
     void paintMan(Graphics g) {
-        g.drawOval(man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight - (seventhHeight/2), 20, 20);
+//        g.drawOval(man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight - (seventhHeight/2), 20, 20);
+        g.drawImage(manImage,man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight - (int)(seventhHeight/1.5), null);
     }
 
     public Man getMan() {

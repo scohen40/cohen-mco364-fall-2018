@@ -34,7 +34,6 @@ public class AnimatedMazeGUI extends JFrame {
 
         @Override
         public void keyPressed(KeyEvent keyEvent) {
-            System.out.println("key detected");
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
                 //set man direction
                 getAnimatedMaze().getMan().setDirection(Direction.LEFT);
@@ -71,7 +70,6 @@ public class AnimatedMazeGUI extends JFrame {
                     if (row == 0) {
                         break;
                     }
-                    System.out.println("row: " + row + " column: " + column);
                     if (!maze.getMaze()[row][column].isNorthWall()) {
                         //reset the man's row and column.
                         animatedMaze.getMan().setRow(row);
@@ -84,7 +82,6 @@ public class AnimatedMazeGUI extends JFrame {
                     if (column + 1 >= animatedMaze.getWidth()) {
                         break;
                     }
-                    System.out.println("row: " + row + " column: " + column);
                     if (!maze.getMaze()[row][column].isEastWall()) {
                         //reset the man's row and column.
                         animatedMaze.getMan().setColumn(column + 2);
@@ -97,7 +94,6 @@ public class AnimatedMazeGUI extends JFrame {
                     if (row + 1 >= animatedMaze.getHeight()) {
                         break;
                     }
-                    System.out.println("row: " + row + " column: " + column);
                     if (!maze.getMaze()[row][column].isSouthWall()) {
                         //reset the man's row and column.
                         animatedMaze.getMan().setRow(row + 2);
@@ -110,7 +106,6 @@ public class AnimatedMazeGUI extends JFrame {
                     if (column == 0) {
                         break;
                     }
-                    System.out.println("row: " + row + " column: " + column);
                     if (!maze.getMaze()[row][column].isWestWall()) {
                         //reset the man's row and column.
                         animatedMaze.getMan().setColumn(column);
