@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 
@@ -27,9 +26,9 @@ public class AnimatedMaze extends JComponent {
     protected void paintComponent(Graphics g) {
         //having trouble loading.
         try {
-            manImage = ImageIO.read(new File("src/images/shortMan.png"));
+            manImage = ImageIO.read(AnimatedMaze.class.getResourceAsStream("/shortMan.png"));
         } catch (IOException e) {
-            System.out.println("man image for search button could not be loaded. contact system admin.");
+            e.printStackTrace();
         }
 
 
