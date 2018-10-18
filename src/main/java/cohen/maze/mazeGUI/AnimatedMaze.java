@@ -77,7 +77,6 @@ public class AnimatedMaze extends JComponent {
     }
 
     void paintMan(Graphics g) {
-//        g.drawOval(man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight - (seventhHeight/2), 20, 20);
         g.drawImage(manImage,man.getColumn()*seventhHeight + (seventhHeight/2), man.getRow()*seventhHeight - (int)(seventhHeight/1.5), null);
     }
 
