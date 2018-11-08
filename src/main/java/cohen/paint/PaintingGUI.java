@@ -3,9 +3,7 @@ package cohen.paint;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 
 public class PaintingGUI extends JFrame implements MouseMotionListener, MouseListener {
     private Canvas painting;
@@ -19,7 +17,12 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         panel.setLayout(new BorderLayout());
 
         painting = new Canvas();
-        panel.add(painting, BorderLayout.CENTER);
+        panel.add(painting, BorderLayout.SOUTH);
+
+        JButton button = new JButton("Pick to Change Background");
+
+//        button.addActionListener(this::changeColor);
+        panel.add(button, BorderLayout.NORTH);
 
 
         painting.addMouseListener(this);
@@ -28,6 +31,14 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
 
         setContentPane(panel);
     }
+
+//    private void changeColor(ActionEvent actionEvent) {
+//        Color newColor = JColorChooser.showDialog(
+//                ColorChooserDemo2.this,
+//                "Choose Background Color",
+//                banner.getBackground());
+//    }
+//
 
     public static void main(String args[]) {
         new PaintingGUI().setVisible(true);
