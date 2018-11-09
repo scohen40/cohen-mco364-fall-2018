@@ -7,9 +7,10 @@ public class Dot {
     private int yCoord;
     private Color color;
 
-    public Dot(int xCoord, int yCoord) {
+    public Dot(int xCoord, int yCoord, Color color) {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
+        this.color = color;
     }
 
     public int getxCoord() {

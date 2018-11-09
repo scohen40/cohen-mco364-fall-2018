@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Canvas extends JComponent {
     private ArrayList<ArrayList<Dot>> dots = new ArrayList<>();
     private int counter = 0;
+    private Color currentColor;
 
     public Canvas() {
         dots.add(new ArrayList<>());
@@ -17,7 +18,7 @@ public class Canvas extends JComponent {
 
         for(int i = 0; i < dots.size(); i++) {
             for(int j = 1; j < dots.get(i).size(); j++) {
-
+                g.setColor(dots.get(i).get(j).getColor());
                 g.drawLine(
                         dots.get(i).get(j).getxCoord(),
                         dots.get(i).get(j).getyCoord(),
@@ -35,7 +36,11 @@ public class Canvas extends JComponent {
 
     public void draw(int x, int y) {
         //add new coords to the current line
-        dots.get(counter).add(new Dot(x, y));
+        dots.get(counter).add(new Dot(x, y, currentColor));
+    }
+
+    public void setCurrentColor(Color color) {
+        currentColor = color;
     }
 
 }

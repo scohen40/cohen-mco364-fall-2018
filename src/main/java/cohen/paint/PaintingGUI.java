@@ -17,11 +17,11 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         panel.setLayout(new BorderLayout());
 
         painting = new Canvas();
-        panel.add(painting, BorderLayout.SOUTH);
+        panel.add(painting, BorderLayout.CENTER);
 
         JButton button = new JButton("Pick to Change Background");
 
-//        button.addActionListener(this::changeColor);
+        button.addActionListener(this::changeColor);
         panel.add(button, BorderLayout.NORTH);
 
 
@@ -32,13 +32,14 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         setContentPane(panel);
     }
 
-//    private void changeColor(ActionEvent actionEvent) {
-//        Color newColor = JColorChooser.showDialog(
-//                ColorChooserDemo2.this,
-//                "Choose Background Color",
-//                banner.getBackground());
-//    }
-//
+    private void changeColor(ActionEvent actionEvent) {
+        Color newColor = JColorChooser.showDialog(
+                PaintingGUI.this,
+                "Choose Background Color",
+                Color.black);
+        painting.setCurrentColor(newColor);
+    }
+
 
     public static void main(String args[]) {
         new PaintingGUI().setVisible(true);
