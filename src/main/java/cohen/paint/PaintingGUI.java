@@ -13,18 +13,31 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        //main panel
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
+        //buttons panel
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout());
+
+        //buttons
+        //button 1
+        JButton colorButton = new JButton("Pick to Change Background");
+        buttons.add(colorButton);
+        colorButton.addActionListener(this::changeColor);
+        //button 2
+        JButton pencilButton = new JButton("Pencil Draw");
+        buttons.add(pencilButton);
+        //button 3
+        JButton rectangleButton = new JButton("Rectangle Draw");
+        buttons.add(rectangleButton);
+        //add buttons panel to main panel
+        panel.add(buttons, BorderLayout.NORTH);
+
+        //add canvas to main panel
         painting = new Canvas();
         panel.add(painting, BorderLayout.CENTER);
-
-        JButton button = new JButton("Pick to Change Background");
-
-        button.addActionListener(this::changeColor);
-        panel.add(button, BorderLayout.NORTH);
-
-
         painting.addMouseListener(this);
         painting.addMouseMotionListener(this);
 
