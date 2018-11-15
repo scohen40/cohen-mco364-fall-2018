@@ -7,6 +7,8 @@ import java.awt.*;
 public class RectangleShape {
     private Dot startLocation;
     private Dot endLocation;
+    private int x;
+    private int y;
     private int height;
     private int width;
 
@@ -20,6 +22,8 @@ public class RectangleShape {
     }
 
     public void setDimentions() {
+//        x = Math.abs(startLocation.getX(), endLocation.getY());
+//        y = Math.abs(startLocation.getY(), endLocation.getY());
         width = Math.abs(startLocation.getX() - endLocation.getX());
         height = Math.abs(startLocation.getY() - endLocation.getY());
     }
