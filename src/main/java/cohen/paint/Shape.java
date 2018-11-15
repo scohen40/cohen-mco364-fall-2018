@@ -1,22 +1,22 @@
 package cohen.paint;
 
+import java.awt.*;
+
 public class Shape {
-//    private ArrayList<Dot> coords = new ArrayList<Dot>();
-//
-//    public ArrayList<Dot> getCoords() {
-//        return coords;
-//    }
-//
-//    public void setCoords(ArrayList<Dot> coords) {
-//        this.coords = coords;
-//    }
+    private Color color;
     private ShapeType shapeType;
 
     public Shape() {
-
     }
 
-    public void setShapeType(ShapeType shapeType) { this.shapeType = shapeType; }
+    public Shape(Color color, ShapeType shapeType) {
+        this.color = color;
+        this.shapeType = shapeType;
+    }
+
+    public Color getColor() {
+        return color;
+    }
 
     public ShapeType getShapeType() { return shapeType; }
 }

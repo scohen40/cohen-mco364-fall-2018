@@ -73,7 +73,9 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
     @Override
     public void mouseDragged(MouseEvent e) {
         if(currentShapeType == ShapeType.Line) {
-            painting.drawLine(e.getX(), e.getY());
+//            painting.addShape(ShapeType.Line);
+            LineShape currentShape = (LineShape) painting.getCurrentShape();
+            currentShape.getDots().add(new Dot(e.getX(), e.getY()));
         }
         else if(currentShapeType == ShapeType.Rectangle) {
             RectangleShape currentShape = (RectangleShape)painting.getCurrentShape();

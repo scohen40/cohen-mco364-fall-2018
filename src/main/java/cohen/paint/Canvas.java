@@ -9,7 +9,7 @@ public class Canvas extends JComponent {
 
     private int shapeCounter = 0;
 
-    private Color currentColor;
+    private Color currentColor = Color.BLACK; //default color
 
 
     public Canvas() {
@@ -48,18 +48,14 @@ public class Canvas extends JComponent {
 
     public void addShape(ShapeType shapeType) {
         if(shapeType.equals(ShapeType.Line)) {
-            shapes.add(new LineShape(currentColor));
+            shapes.add(new LineShape(currentColor, shapeType));
+            shapeCounter++;
         }
         else if(shapeType.equals(ShapeType.Rectangle)) {
-            shapes.add(new RectangleShape(currentColor));
+            shapes.add(new RectangleShape(currentColor, shapeType));
+            shapeCounter++;
         }
     }
-
-    public void drawLine(int x, int y) {
-        //add new coords to the current line of dots
-        ((LineShape)shapes.get(shapeCounter)).getDots().add(new Dot(x, y));
-    }
-
 
     public void setCurrentColor(Color color) {
         currentColor = color;

@@ -10,14 +10,8 @@ public class RectangleShape extends Shape {
     private int height;
     private int width;
 
-    private Color color;
-
-    public RectangleShape() {
-        super();
-    }
-
-    public RectangleShape(Color color) {
-        this.color = color;
+    public RectangleShape(Color color, ShapeType shapeType) {
+        super(color, shapeType);
     }
 
     public void setDimentions() {
@@ -59,13 +53,5 @@ public class RectangleShape extends Shape {
 
     public void setWidth(int width) {
         this.width = width;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 }
