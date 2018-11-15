@@ -1,12 +1,14 @@
 package cohen.paint;
 
 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class PaintingGUI extends JFrame implements MouseMotionListener, MouseListener {
     private Canvas painting;
+    private ShapeType currentShapeType = ShapeType.Line;    //default shape
 
     public PaintingGUI() {
         setTitle("Paint Viewer");
@@ -29,9 +31,11 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         //button 2
         JButton pencilButton = new JButton("Pencil Draw");
         buttons.add(pencilButton);
+        pencilButton.addActionListener(this::setCurrentPencil);
         //button 3
-        JButton rectangleButton = new JButton("Rectangle Draw");
+        JButton rectangleButton = new JButton("RectangleShape Draw");
         buttons.add(rectangleButton);
+        rectangleButton.addActionListener(this::setCurrentRectangle);
         //add buttons panel to main panel
         panel.add(buttons, BorderLayout.NORTH);
 
@@ -53,6 +57,14 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         painting.setCurrentColor(newColor);
     }
 
+    private void setCurrentPencil(ActionEvent actionEvent) {
+        currentShapeType = ShapeType.Line;
+    }
+
+    private void setCurrentRectangle(ActionEvent actionEvent) {
+        currentShapeType = ShapeType.Rectangle;
+    }
+
 
     public static void main(String args[]) {
         new PaintingGUI().setVisible(true);
@@ -60,7 +72,13 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        painting.draw(e.getX(), e.getY());
+        if(currentShapeType == ShapeType.Line) {
+            painting.drawLine(e.getX(), e.getY());
+        }
+        else if(currentShapeType == ShapeType.Rectangle) {
+            painting.getCurrentRectangle().setEndLocation(new Dot(e.getX(), e.getY()));
+            painting.getCurrentRectangle().setDimentions();
+        }
         painting.repaint();
     }
 
@@ -76,12 +94,25 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        if(currentShapeType == ShapeType.Line){
+            painting.newPencilLine();
+        }
+        else if(currentShapeType == ShapeType.Rectangle) {
+            painting.newRectangle();
+            painting.getCurrentRectangle().setStartLocation(new Dot(e.getX(), e.getY()));
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        painting.newPencilLine();
+        if(currentShapeType == ShapeType.Line){
+//            painting.newPencilLine();
+        }
+        else if(currentShapeType == ShapeType.Rectangle) {
+            painting.getCurrentRectangle().setEndLocation(new Dot(e.getX(), e.getY()));
+            painting.getCurrentRectangle().setDimentions();
+        }
+        painting.repaint();
     }
 
     @Override

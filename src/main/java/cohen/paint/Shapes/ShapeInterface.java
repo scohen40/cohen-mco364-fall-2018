@@ -4,7 +4,7 @@ import cohen.paint.Dot;
 
 import java.util.ArrayList;
 
-public class Shape {
+public class ShapeInterface {
     private ArrayList<Dot> coords = new ArrayList<Dot>();
 
     public ArrayList<Dot> getCoords() {
