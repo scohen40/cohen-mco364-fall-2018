@@ -1,10 +1,8 @@
-package cohen.paint.Shapes;
-
-import cohen.paint.Dot;
+package cohen.paint;
 
 import java.awt.*;
 
-public class RectangleShape {
+public class RectangleShape extends Shape {
     private Dot startLocation;
     private Dot endLocation;
     private int x;
@@ -15,6 +13,7 @@ public class RectangleShape {
     private Color color;
 
     public RectangleShape() {
+        super();
     }
 
     public RectangleShape(Color color) {

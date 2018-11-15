@@ -1,16 +1,15 @@
-package cohen.paint.Shapes;
-
-import cohen.paint.Dot;
+package cohen.paint;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class LineShape extends ShapeInterface {
+public class LineShape extends Shape {
     private ArrayList<Dot> dots;
 
     private Color color;
 
     public LineShape() {
+        super();
         dots = new ArrayList<>();
     }
 
@@ -34,5 +33,4 @@ public class LineShape extends ShapeInterface {
     public void setColor(Color color) {
         this.color = color;
     }
-
 }

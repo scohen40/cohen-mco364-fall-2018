@@ -76,8 +76,9 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
             painting.drawLine(e.getX(), e.getY());
         }
         else if(currentShapeType == ShapeType.Rectangle) {
-            painting.getCurrentRectangle().setEndLocation(new Dot(e.getX(), e.getY()));
-            painting.getCurrentRectangle().setDimentions();
+            RectangleShape currentShape = (RectangleShape)painting.getCurrentShape();
+            currentShape.setEndLocation(new Dot(e.getX(), e.getY()));
+            currentShape.setDimentions();
         }
         painting.repaint();
     }
@@ -95,22 +96,24 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
     @Override
     public void mousePressed(MouseEvent e) {
         if(currentShapeType == ShapeType.Line){
-            painting.newPencilLine();
+            painting.addShape(ShapeType.Line);
         }
         else if(currentShapeType == ShapeType.Rectangle) {
-            painting.newRectangle();
-            painting.getCurrentRectangle().setStartLocation(new Dot(e.getX(), e.getY()));
+            painting.addShape(ShapeType.Rectangle);
+            RectangleShape currentShape = (RectangleShape)painting.getCurrentShape();
+            currentShape.setStartLocation(new Dot(e.getX(), e.getY()));
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         if(currentShapeType == ShapeType.Line){
-//            painting.newPencilLine();
+            //nothing happens
         }
         else if(currentShapeType == ShapeType.Rectangle) {
-            painting.getCurrentRectangle().setEndLocation(new Dot(e.getX(), e.getY()));
-            painting.getCurrentRectangle().setDimentions();
+            RectangleShape currentShape = (RectangleShape)painting.getCurrentShape();
+            currentShape.setEndLocation(new Dot(e.getX(), e.getY()));
+            currentShape.setDimentions();
         }
         painting.repaint();
     }
