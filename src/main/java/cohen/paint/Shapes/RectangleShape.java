@@ -22,8 +22,6 @@ public class RectangleShape {
     }
 
     public void setDimentions() {
-//        x = Math.abs(startLocation.getX(), endLocation.getY());
-//        y = Math.abs(startLocation.getY(), endLocation.getY());
         width = Math.abs(startLocation.getX() - endLocation.getX());
         height = Math.abs(startLocation.getY() - endLocation.getY());
     }
@@ -43,6 +41,10 @@ public class RectangleShape {
     public void setEndLocation(Dot endLocation) {
         this.endLocation = endLocation;
     }
+
+    public int getX() { return x; }
+
+    public int getY() { return y; }
 
     public int getHeight() {
         return height;
