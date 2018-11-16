@@ -112,11 +112,11 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
         if(currentShapeType == ShapeType.Line){
             //nothing happens
         }
-        else if(currentShapeType == ShapeType.Rectangle) {
-            RectangleShape currentShape = (RectangleShape)painting.getCurrentShape();
-            currentShape.setEndLocation(new Dot(e.getX(), e.getY()));
-            currentShape.setDimentions();
-        }
+//        else if(currentShapeType == ShapeType.Rectangle) {
+//            RectangleShape currentShape = (RectangleShape)painting.getCurrentShape();
+//            currentShape.setEndLocation(new Dot(e.getX(), e.getY()));
+//            currentShape.setDimentions();
+//        }
         painting.repaint();
     }
 

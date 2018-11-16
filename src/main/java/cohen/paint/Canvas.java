@@ -2,47 +2,29 @@ package cohen.paint;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-public class Canvas extends JComponent {
+public class Canvas extends JComponent implements MouseListener, MouseMotionListener {
     private ArrayList<Shape> shapes = new ArrayList<>();
-
-    private int shapeCounter = 0;
-
+    private Tool tool = null;
     private Color currentColor = Color.BLACK; //default color
 
-
     public Canvas() {
-        shapes.add(new Shape()); //add null shape as a buffer
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
     }
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         paintShapes(g);
     }
 
     public void paintShapes(Graphics g) {
-        for(int shape = 1; shape < shapes.size(); shape++) {
-            if(shapes.get(shape).getShapeType().equals(ShapeType.Line)) {
-                LineShape line = (LineShape)shapes.get(shape);
-
-                for(int dot = 1; dot < line.getDots().size(); dot++) {
-                    ArrayList<Dot> currentLine = line.getDots();
-                    g.setColor(line.getColor());
-                    g.drawLine(
-                            currentLine.get(dot).getX(),
-                            currentLine.get(dot).getY(),
-                            currentLine.get(dot-1).getX(),
-                            currentLine.get(dot-1).getY());
-                }
-            }
-            else if(shapes.get(shape).getShapeType().equals(ShapeType.Rectangle)) {
-                RectangleShape rectangle = (RectangleShape)shapes.get(shape);
-
-                g.setColor(rectangle.getColor());
-                g.drawRect(rectangle.getStartLocation().getX(), rectangle.getStartLocation().getY(), rectangle.getWidth(),rectangle.getHeight());
-            }
+        for (Shape shape : shapes) {
+            shape.paint(g);
         }
     }
 
@@ -61,12 +43,42 @@ public class Canvas extends JComponent {
         currentColor = color;
     }
 
-    public ArrayList getShapes() {
-        return shapes;
-    }
-
     public Shape getCurrentShape(){
         return shapes.get(shapeCounter);
     }
 
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+
+    }
 }
