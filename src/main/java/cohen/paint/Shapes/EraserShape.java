@@ -2,9 +2,9 @@ package cohen.paint.Shapes;
 
 import java.awt.*;
 
-public class ErasorShape extends LineShape{
+public class EraserShape extends LineShape{
 
-    public ErasorShape() {
+    public EraserShape() {
         super();
     }
 
