@@ -1,4 +1,4 @@
-package cohen.paint;
+package cohen.paint.Shapes;
 
 public enum ShapeType {
     Line,

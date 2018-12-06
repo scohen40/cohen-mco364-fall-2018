@@ -1,19 +1,31 @@
 package cohen.paint;
 
+import cohen.paint.Shapes.Shape;
+import cohen.paint.tools.LineTool;
+import cohen.paint.tools.ShapeTool;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
-public class Canvas extends JComponent {
+public class Canvas extends JComponent implements MouseMotionListener, MouseListener {
+
     private ArrayList<Shape> shapes = new ArrayList<>();
-
-    private int shapeCounter = 0;
-
     private Color currentColor;
+    private ShapeTool currentShapeTool;
 
 
     public Canvas() {
-        shapes.add(new Shape()); //add null shape as a buffer
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+
+        this.currentShapeTool = new LineTool();
+        currentColor = Color.black;
+
+        shapes.add(new Shape(currentColor)); //add null shape as a buffer
     }
 
     protected void paintComponent(Graphics g) {
@@ -23,54 +35,62 @@ public class Canvas extends JComponent {
     }
 
     public void paintShapes(Graphics g) {
-        for(int shape = 1; shape < shapes.size(); shape++) {
-            if(shapes.get(shape).getShapeType().equals(ShapeType.Line)) {
-                LineShape line = (LineShape)shapes.get(shape);
-
-                for(int dot = 1; dot < line.getDots().size(); dot++) {
-                    ArrayList<Dot> currentLine = line.getDots();
-                    g.setColor(line.getColor());
-                    g.drawLine(
-                            currentLine.get(dot).getX(),
-                            currentLine.get(dot).getY(),
-                            currentLine.get(dot-1).getX(),
-                            currentLine.get(dot-1).getY());
-                }
-            }
-            else if(shapes.get(shape).getShapeType().equals(ShapeType.Rectangle)) {
-                RectangleShape rectangle = (RectangleShape)shapes.get(shape);
-
-                g.setColor(rectangle.getColor());
-                g.drawRect(rectangle.getStartLocation().getX(), rectangle.getStartLocation().getY(), rectangle.getWidth(),rectangle.getHeight());
-            }
+        for(Shape shape : shapes) {
+            shape.paintShape(g);
         }
     }
-
-    public void addShape(ShapeType shapeType) {
-        if(shapeType.equals(ShapeType.Line)) {
-            shapes.add(new LineShape(currentColor));
-        }
-        else if(shapeType.equals(ShapeType.Rectangle)) {
-            shapes.add(new RectangleShape(currentColor));
-        }
-    }
-
-    public void drawLine(int x, int y) {
-        //add new coords to the current line of dots
-        ((LineShape)shapes.get(shapeCounter)).getDots().add(new Dot(x, y));
-    }
-
 
     public void setCurrentColor(Color color) {
         currentColor = color;
     }
 
-    public ArrayList getShapes() {
-        return shapes;
+    public void setCurrentShapeTool(ShapeTool shapeTool) {
+        this.currentShapeTool = shapeTool;
     }
 
-    public Shape getCurrentShape(){
-        return shapes.get(shapeCounter);
+    public void undoLastShape() {
+        if(!shapes.isEmpty()) {
+            shapes.remove(shapes.size()-1);
+            repaint();
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        currentShapeTool.onMouseDragged(e.getX(), e.getY());
+        repaint();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        currentShapeTool.onMousePressed(e.getX(), e.getY(), currentColor);
+        shapes.add(currentShapeTool.getShape());
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        currentShapeTool.onMouseReleased(e.getX(), e.getY());
+        repaint();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 
 }

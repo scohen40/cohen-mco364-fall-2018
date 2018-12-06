@@ -1,23 +1,19 @@
-package cohen.paint;
+package cohen.paint.Shapes;
 
 import java.awt.*;
 
 public class RectangleShape extends Shape {
     private Dot startLocation;
     private Dot endLocation;
-    private int x;
-    private int y;
+    private int tempX;
+    private int tempY;
     private int height;
     private int width;
 
-    private Color color;
-
-    public RectangleShape() {
-        super();
-    }
 
     public RectangleShape(Color color) {
-        this.color = color;
+        super(color);
+
     }
 
     public void setDimentions() {
@@ -25,47 +21,45 @@ public class RectangleShape extends Shape {
         height = Math.abs(startLocation.getY() - endLocation.getY());
     }
 
-    public Dot getStartLocation() {
-        return startLocation;
-    }
-
     public void setStartLocation(Dot startLocation) {
         this.startLocation = startLocation;
     }
 
-    public Dot getEndLocation() {
-        return endLocation;
+    public Dot getStartLocation() {
+        return startLocation;
     }
 
     public void setEndLocation(Dot endLocation) {
         this.endLocation = endLocation;
     }
 
-    public int getX() { return x; }
-
-    public int getY() { return y; }
-
-    public int getHeight() {
-        return height;
+    public Dot getEndLocation() {
+        return endLocation;
     }
 
     public void setHeight(int height) {
         this.height = height;
     }
 
-    public int getWidth() {
-        return width;
+    public int getHeight() {
+        return height;
     }
 
     public void setWidth(int width) {
         this.width = width;
     }
 
-    public Color getColor() {
-        return color;
+    public int getWidth() {
+        return width;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    @Override
+    public void paintShape(Graphics g) {
+        g.setColor(this.getColor());
+        g.drawRect(
+                startLocation.getX(),
+                startLocation.getY(),
+                width,
+                height);
     }
 }
