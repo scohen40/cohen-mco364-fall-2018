@@ -2,64 +2,52 @@ package cohen.paint.Shapes;
 
 import java.awt.*;
 
-public class RectangleShape extends Shape {
-    private Dot startLocation;
-    private Dot endLocation;
-    private int tempX;
-    private int tempY;
-    private int height;
-    private int width;
+import static java.lang.Math.min;
 
+public class RectangleShape extends Shape {
+    private int x1;
+    private int y1;
+    private int x2;
+    private int y2;
 
     public RectangleShape(Color color) {
         super(color);
 
     }
 
-    public void setDimentions() {
-        width = Math.abs(startLocation.getX() - endLocation.getX());
-        height = Math.abs(startLocation.getY() - endLocation.getY());
+    public void setXY1(int x, int y) {
+        this.x1 = x;
+        this.y1 = y;
     }
 
-    public void setStartLocation(Dot startLocation) {
-        this.startLocation = startLocation;
+    public void setXY2(int x, int y) {
+        this.x2 = x;
+        this.y2 = y;
     }
 
-    public Dot getStartLocation() {
-        return startLocation;
+    public int getX1() {
+        return x1;
     }
 
-    public void setEndLocation(Dot endLocation) {
-        this.endLocation = endLocation;
+    public int getY1() {
+        return y1;
     }
 
-    public Dot getEndLocation() {
-        return endLocation;
+    public int getX2() {
+        return x2;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getWidth() {
-        return width;
+    public int getY2() {
+        return y2;
     }
 
     @Override
     public void paintShape(Graphics g) {
         g.setColor(this.getColor());
         g.drawRect(
-                startLocation.getX(),
-                startLocation.getY(),
-                width,
-                height);
+                min(x1, x2),
+                min(y1, y2),
+                Math.abs(x1 - x2),
+                Math.abs(y1 - y2));
     }
 }

@@ -25,7 +25,7 @@ public class LineTool implements ShapeTool{
         ArrayList<Dot> dots = new ArrayList<>();
         dots.add(new Dot(x, y));
         line.setDots(dots);
-        line.setColor(color);
+//        line.setColor(color);
     }
 
     @Override

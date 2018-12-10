@@ -4,11 +4,15 @@ import cohen.paint.Shapes.Shape;
 import cohen.paint.tools.LineTool;
 import cohen.paint.tools.ShapeTool;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Canvas extends JComponent implements MouseMotionListener, MouseListener {
@@ -52,6 +56,28 @@ public class Canvas extends JComponent implements MouseMotionListener, MouseList
         if(!shapes.isEmpty()) {
             shapes.remove(shapes.size()-1);
             repaint();
+        }
+    }
+
+    public void saveImage(File file) {
+        BufferedImage bufferedImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+//        try {
+//            bufferedImage = new Robot().createScreenCapture(this.bounds());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        Graphics2D g2D = bufferedImage.createGraphics();
+//        g2D.setColor(new Color(238, 238, 238));
+//        g2D.fillRect(0, 0, getHeight(), getWidth());
+        for (Shape shape : shapes) {
+            shape.paintShape(g2D);
+        }
+        this.paint(g2D);
+        try {
+            ImageIO.write(bufferedImage,"png", file);
+            JOptionPane.showMessageDialog(null,"Image Saved to savedImages");
+        } catch (IOException e) {
+            System.out.println("error");
         }
     }
 

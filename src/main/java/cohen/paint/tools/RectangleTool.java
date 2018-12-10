@@ -1,6 +1,5 @@
 package cohen.paint.tools;
 
-import cohen.paint.Shapes.Dot;
 import cohen.paint.Shapes.RectangleShape;
 import cohen.paint.Shapes.Shape;
 
@@ -11,20 +10,18 @@ public class RectangleTool implements ShapeTool {
 
     @Override
     public void onMouseDragged(int x, int y) {
-        rectangle.setEndLocation(new Dot(x, y));
-        rectangle.setDimentions();
+        rectangle.setXY2(x, y);
     }
 
     @Override
     public void onMousePressed(int x, int y, Color color) {
         rectangle = new RectangleShape(color);
-        rectangle.setStartLocation(new Dot(x, y));
+        rectangle.setXY1(x, y);
     }
 
     @Override
     public void onMouseReleased(int x, int y) {
-        rectangle.setEndLocation(new Dot(x, y));
-        rectangle.setDimentions();
+        rectangle.setXY2(x, y);
     }
 
     @Override

@@ -5,13 +5,13 @@ import java.awt.*;
 public class EraserShape extends LineShape{
 
     public EraserShape() {
-        super();
+        super(new Color(238, 238, 238));
     }
 
     @Override
     public void paintShape(Graphics g) {
 //        g.setColor(getColor());
-        g.setColor(Color.white);
+        g.setColor(new Color(238, 238, 238));
 
         for(int d = 1; d < getDots().size(); d++) {
             g.fillRect(
@@ -21,3 +21,4 @@ public class EraserShape extends LineShape{
         }
     }
 }
+

@@ -2,6 +2,8 @@ package cohen.paint.Shapes;
 
 import java.awt.*;
 
+import static java.lang.Math.min;
+
 public class FilledRectangleShape extends RectangleShape {
 
     public FilledRectangleShape(Color color) {
@@ -12,9 +14,9 @@ public class FilledRectangleShape extends RectangleShape {
     public void paintShape(Graphics g) {
         g.setColor(this.getColor());
         g.fillRect(
-                this.getStartLocation().getX(),
-                this.getStartLocation().getY(),
-                this.getWidth(),
-                this.getHeight());
+                min(getX1(), getX2()),
+                min(getY1(), getY2()),
+                Math.abs(getX1() - getX2()),
+                Math.abs(getY1() - getY2()) );
     }
 }

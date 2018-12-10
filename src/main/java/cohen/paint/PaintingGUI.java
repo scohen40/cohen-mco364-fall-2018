@@ -10,22 +10,25 @@ import cohen.paint.tools.RectangleTool;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 public class PaintingGUI extends JFrame {
     private Canvas canvas;
+    private File file;
 
     public PaintingGUI() {
         setTitle("Paint Viewer");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        file = new File("");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
 
         JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout(2, 3));
+        buttons.setLayout(new GridLayout(3, 3));
 
         JButton colorButton = new JButton("Pick to Change Color");
         buttons.add(colorButton);
@@ -50,6 +53,10 @@ public class PaintingGUI extends JFrame {
         JButton undoButton = new JButton("Undo");
         buttons.add(undoButton);
         undoButton.addActionListener(this::undoLastShape);
+
+        JButton saveButton = new JButton("Save");
+        buttons.add(saveButton);
+        saveButton.addActionListener(this::saveImage);
 
         panel.add(buttons, BorderLayout.NORTH);
 
@@ -85,6 +92,18 @@ public class PaintingGUI extends JFrame {
 
     private void undoLastShape(ActionEvent actionEvent) {
         canvas.undoLastShape();
+    }
+
+    private void saveImage(ActionEvent actionEvent) {
+        JFileChooser fileChooser = new JFileChooser();
+        try {
+            if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                file = fileChooser.getSelectedFile();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        canvas.saveImage(file);
     }
 
     public static void main(String args[]) {
