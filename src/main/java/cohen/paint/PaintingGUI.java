@@ -106,7 +106,6 @@ public class PaintingGUI extends JFrame {
         canvas.saveImage(file);
     }
 
-
     public static void main(String args[]) {
         new PaintingGUI().setVisible(true);
     }

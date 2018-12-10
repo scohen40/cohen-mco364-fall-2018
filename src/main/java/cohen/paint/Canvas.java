@@ -81,14 +81,10 @@ public class Canvas extends JComponent implements MouseListener, MouseMotionList
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
+    public void mouseMoved(MouseEvent e) { }
 
     @Override
-    public void mouseClicked(MouseEvent e) { }
-
-
+    public void mouseClicked(MouseEvent mouseEvent) { }
 
     @Override
     public void mousePressed(MouseEvent e) {
