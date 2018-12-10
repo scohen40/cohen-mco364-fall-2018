@@ -17,19 +17,21 @@ public class LineShape extends Shape {
         return dots;
     }
 
+    public void setDots(ArrayList<Dot> dots) {
+        this.dots = dots;
+    }
+
+    @Override
     public void paintShape(Graphics g){
         g.setColor(getColor());
 
         for(int d = 1; d < dots.size(); d++) {
-        g.drawLine(
-                dots.get(d).getX(),
-                dots.get(d).getY(),
-                dots.get(d-1).getX(),
-                dots.get(d-1).getY());
+            g.drawLine(
+                    dots.get(d).getX(),
+                    dots.get(d).getY(),
+                    dots.get(d-1).getX(),
+                    dots.get(d-1).getY());
         }
     }
 
-    public void setDots(ArrayList<Dot> dots) {
-        this.dots = dots;
-    }
 }

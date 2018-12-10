@@ -1,7 +1,6 @@
 package cohen.paint;
 
 
-
 import cohen.paint.tools.ErasorTool;
 import cohen.paint.tools.FilledRectangleTool;
 import cohen.paint.tools.LineTool;
@@ -82,6 +81,7 @@ public class PaintingGUI extends JFrame {
         canvas.setCurrentShapeTool(new RectangleTool());
     }
 
+
     private void setCurrentFillRectangle(ActionEvent actionEvent) {
         canvas.setCurrentShapeTool(new FilledRectangleTool());
     }
@@ -105,6 +105,7 @@ public class PaintingGUI extends JFrame {
         }
         canvas.saveImage(file);
     }
+
 
     public static void main(String args[]) {
         new PaintingGUI().setVisible(true);

@@ -10,16 +10,17 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Canvas extends JComponent implements MouseMotionListener, MouseListener {
 
+public class Canvas extends JComponent implements MouseListener, MouseMotionListener {
     private ArrayList<Shape> shapes = new ArrayList<>();
-    private Color currentColor;
-    private ShapeTool currentShapeTool;
+    private ShapeTool currentShapeTool = null;
+    private Color currentColor = Color.BLACK; //default color
 
 
     public Canvas() {
@@ -34,7 +35,6 @@ public class Canvas extends JComponent implements MouseMotionListener, MouseList
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         paintShapes(g);
     }
 
@@ -61,14 +61,7 @@ public class Canvas extends JComponent implements MouseMotionListener, MouseList
 
     public void saveImage(File file) {
         BufferedImage bufferedImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
-//        try {
-//            bufferedImage = new Robot().createScreenCapture(this.bounds());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
         Graphics2D g2D = bufferedImage.createGraphics();
-//        g2D.setColor(new Color(238, 238, 238));
-//        g2D.fillRect(0, 0, getHeight(), getWidth());
         for (Shape shape : shapes) {
             shape.paintShape(g2D);
         }
@@ -93,9 +86,9 @@ public class Canvas extends JComponent implements MouseMotionListener, MouseList
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) { }
 
-    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -110,13 +103,9 @@ public class Canvas extends JComponent implements MouseMotionListener, MouseList
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) { }
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) { }
 
 }
