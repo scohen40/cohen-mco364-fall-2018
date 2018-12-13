@@ -10,10 +10,8 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
@@ -59,19 +57,73 @@ public class Canvas extends JComponent implements MouseListener, MouseMotionList
         }
     }
 
-    public void saveImage(File file) {
+    public void saveImagePNG(File file) {
         BufferedImage bufferedImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2D = bufferedImage.createGraphics();
-        for (Shape shape : shapes) {
-            shape.paintShape(g2D);
-        }
+        this.paintShapes(g2D); //see if this works, if it doesn't, uncomment the next few lines and get rid of this one.
+//        for (Shape shape : shapes) {
+//            shape.paintShape(g2D);
+//        }
         this.paint(g2D);
         try {
             ImageIO.write(bufferedImage,"png", file);
-            JOptionPane.showMessageDialog(null,"Image Saved to savedImages");
+            JOptionPane.showMessageDialog(null,"Image saved.", "Save Successful", JOptionPane.OK_OPTION);
         } catch (IOException e) {
-            System.out.println("error");
+            JOptionPane.showMessageDialog(null, "Image not saved. Contact system admin.", "Save Unsuccessful",JOptionPane.OK_OPTION);
+            e.printStackTrace();
         }
+    }
+
+    public void saveImageProject(File file) throws IOException {
+        FileOutputStream fileOutputStream= null;
+        ObjectOutputStream objectOutputStream = null;
+
+        try {
+            fileOutputStream = new FileOutputStream(file);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Image not saved. Contact system admin.", "Save Unsuccessful",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        try {
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Image not saved. Contact system admin.", "Save Unsuccessful",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        try {
+            objectOutputStream.writeObject(shapes);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Image not saved. Contact system admin.", "Save Unsuccessful",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        objectOutputStream.close();
+    }
+
+
+    public void loadImageProject(File file) throws IOException {
+        FileInputStream fileInputStream= null;
+        ObjectInputStream objectInputStream = null;
+
+        try {
+            fileInputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Project File not found. Contact system admin.", "Project Loading Unsuccessful",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        try {
+            objectInputStream = new ObjectInputStream(fileInputStream);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Loading was unsuccessful. Contact system admin.", "Project Loading Unsuccessfu",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        try {
+            shapes = (ArrayList<Shape>)(objectInputStream.readObject());
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Loading was unsuccessful. Contact system admin.", "Save Unsuccessful",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        objectInputStream.close();
+        this.repaint();
     }
 
     @Override

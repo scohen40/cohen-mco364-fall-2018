@@ -1,8 +1,9 @@
 package cohen.paint.Shapes;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class EraserShape extends LineShape{
+public class EraserShape extends LineShape implements Serializable {
 
     public EraserShape() {
         super(new Color(238, 238, 238));

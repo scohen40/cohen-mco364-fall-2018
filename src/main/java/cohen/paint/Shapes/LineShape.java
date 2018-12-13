@@ -1,9 +1,10 @@
 package cohen.paint.Shapes;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LineShape extends Shape {
+public class LineShape extends Shape implements Serializable {
     private ArrayList<Dot> dots;
 
 

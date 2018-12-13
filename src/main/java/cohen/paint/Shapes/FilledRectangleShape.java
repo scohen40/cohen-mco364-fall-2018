@@ -1,10 +1,11 @@
 package cohen.paint.Shapes;
 
 import java.awt.*;
+import java.io.Serializable;
 
 import static java.lang.Math.min;
 
-public class FilledRectangleShape extends RectangleShape {
+public class FilledRectangleShape extends RectangleShape implements Serializable {
 
     public FilledRectangleShape(Color color) {
         super(color);

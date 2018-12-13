@@ -1,8 +1,9 @@
 package cohen.paint.Shapes;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Shape {
+public class Shape implements Serializable {
 
     private Color color;
 

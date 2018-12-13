@@ -1,10 +1,11 @@
 package cohen.paint.Shapes;
 
 import java.awt.*;
+import java.io.Serializable;
 
 import static java.lang.Math.min;
 
-public class RectangleShape extends Shape {
+public class RectangleShape extends Shape implements Serializable {
     private int x1;
     private int y1;
     private int x2;
