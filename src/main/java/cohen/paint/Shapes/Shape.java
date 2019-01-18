@@ -1,17 +1,31 @@
 package cohen.paint.Shapes;
 
-import cohen.paint.Dot;
+import java.awt.*;
+import java.io.Serializable;
 
-import java.util.ArrayList;
+public class Shape implements Serializable {
 
-public class Shape {
-    private ArrayList<Dot> coords = new ArrayList<Dot>();
+    private Color color;
 
-    public ArrayList<Dot> getCoords() {
-        return coords;
+    public Shape() {
+
     }
 
-    public void setCoords(ArrayList<Dot> coords) {
-        this.coords = coords;
+    public Shape(Color color) {
+        this.color = color;
     }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void paintShape(Graphics g) {
+        g.setColor(color);
+    }
+
 }
+

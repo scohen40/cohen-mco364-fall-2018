@@ -1,46 +1,81 @@
 package cohen.paint;
 
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import cohen.paint.tools.ErasorTool;
+import cohen.paint.tools.FilledRectangleTool;
+import cohen.paint.tools.LineTool;
+import cohen.paint.tools.RectangleTool;
 
-public class PaintingGUI extends JFrame implements MouseMotionListener, MouseListener {
-    private Canvas painting;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
+
+public class PaintingGUI extends JFrame {
+    private Canvas canvas;
+    private File file;
+    private JFileChooser fileChooser;
+    private FileNameExtensionFilter pngFilter;
+    private FileNameExtensionFilter projectFilter;
 
     public PaintingGUI() {
         setTitle("Paint Viewer");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //main panel
+        file = new File("");
+        fileChooser = new JFileChooser();
+        pngFilter = new FileNameExtensionFilter("png", "png");
+        projectFilter = new FileNameExtensionFilter("paint project", "src");
+
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        //buttons panel
-        JPanel buttons = new JPanel();
-        buttons.setLayout(new GridLayout());
 
-        //buttons
-        //button 1
-        JButton colorButton = new JButton("Pick to Change Background");
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(3, 3));
+
+        JButton colorButton = new JButton("Change Color");
         buttons.add(colorButton);
         colorButton.addActionListener(this::changeColor);
-        //button 2
-        JButton pencilButton = new JButton("Pencil Draw");
+
+        JButton pencilButton = new JButton("Pencil");
         buttons.add(pencilButton);
-        //button 3
-        JButton rectangleButton = new JButton("Rectangle Draw");
+        pencilButton.addActionListener(this::setCurrentPencil);
+
+        JButton rectangleButton = new JButton("Rectangle");
         buttons.add(rectangleButton);
-        //add buttons panel to main panel
+        rectangleButton.addActionListener(this::setCurrentRectangle);
+
+        JButton fillRectangleButton = new JButton("Fill Rectangle");
+        buttons.add(fillRectangleButton);
+        fillRectangleButton.addActionListener(this::setCurrentFillRectangle);
+
+        JButton eraseButton = new JButton("Erase");
+        buttons.add(eraseButton);
+        eraseButton.addActionListener(this::setCurrentErase);
+
+        JButton undoButton = new JButton("Undo");
+        buttons.add(undoButton);
+        undoButton.addActionListener(this::undoLastShape);
+
+        JButton savePNGButton = new JButton("Save As PNG");
+        buttons.add(savePNGButton);
+        savePNGButton.addActionListener(this::saveAsPNG);
+
+        JButton saveButton = new JButton("Save Project");
+        buttons.add(saveButton);
+        saveButton.addActionListener(this::saveAsProject);
+
+        JButton loadButton = new JButton("Open Project");
+        buttons.add(loadButton);
+        loadButton.addActionListener(this::loadImage);
+
         panel.add(buttons, BorderLayout.NORTH);
 
-        //add canvas to main panel
-        painting = new Canvas();
-        panel.add(painting, BorderLayout.CENTER);
-        painting.addMouseListener(this);
-        painting.addMouseMotionListener(this);
-
+        canvas = new Canvas();
+        panel.add(canvas, BorderLayout.CENTER);
 
         setContentPane(panel);
     }
@@ -48,49 +83,92 @@ public class PaintingGUI extends JFrame implements MouseMotionListener, MouseLis
     private void changeColor(ActionEvent actionEvent) {
         Color newColor = JColorChooser.showDialog(
                 PaintingGUI.this,
-                "Choose Background Color",
+                "Choose Painting Color",
                 Color.black);
-        painting.setCurrentColor(newColor);
+        canvas.setCurrentColor(newColor);
+    }
+
+    private void setCurrentPencil(ActionEvent actionEvent) {
+        canvas.setCurrentShapeTool(new LineTool());
+    }
+
+    private void setCurrentRectangle(ActionEvent actionEvent) {
+        canvas.setCurrentShapeTool(new RectangleTool());
     }
 
 
-    public static void main(String args[]) {
+    private void setCurrentFillRectangle(ActionEvent actionEvent) {
+        canvas.setCurrentShapeTool(new FilledRectangleTool());
+    }
+
+    private void setCurrentErase(ActionEvent actionEvent) {
+        canvas.setCurrentShapeTool(new ErasorTool());
+    }
+
+    private void undoLastShape(ActionEvent actionEvent) {
+        canvas.undoLastShape();
+    }
+
+    private void saveAsPNG(ActionEvent actionEvent) {
+        fileChooser.setFileFilter(pngFilter);
+        try {
+            int returnVal = fileChooser.showSaveDialog(null);
+
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                file = new File(fileChooser.getSelectedFile().getAbsolutePath() + ".png");
+                canvas.saveImagePNG(file);
+            } else if(returnVal == JFileChooser.ERROR || returnVal == JFileChooser.ERROR_OPTION) {
+                JOptionPane.showMessageDialog(null, "Error saving file. Contact system admin.", "Error",JOptionPane.OK_OPTION);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error saving file. Contact system admin.", "Error",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        clearFileChooser();
+    }
+
+    private void saveAsProject(ActionEvent actionEvent) {
+        fileChooser.setFileFilter(projectFilter);
+        try {
+            int returnVal = fileChooser.showSaveDialog(null);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                file = new File(fileChooser.getSelectedFile().getAbsolutePath() + ".src");
+                canvas.saveImageProject(file);
+            } else if(returnVal == JFileChooser.ERROR || returnVal == JFileChooser.ERROR_OPTION) {
+                JOptionPane.showMessageDialog(null, "Error saving file. Contact system admin.", "Error",JOptionPane.OK_OPTION);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error saving file. Contact system admin.", "Error",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        clearFileChooser();
+    }
+
+    private void loadImage(ActionEvent actionEvent) {
+        try {
+            int returnVal = fileChooser.showOpenDialog(null);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+                canvas.loadImageProject(file);
+            } else if(returnVal == JFileChooser.ERROR || returnVal == JFileChooser.ERROR_OPTION) {
+                JOptionPane.showMessageDialog(null, "Error opening file. Contact system admin.", "Error",JOptionPane.OK_OPTION);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error opening file. Contact system admin.", "Error",JOptionPane.OK_OPTION);
+            e.printStackTrace();
+        }
+        clearFileChooser();
+    }
+
+    private void clearFileChooser() {
+        fileChooser.setSelectedFile(new File(" "));
+    }
+
+    public static void main (String args[]){
         new PaintingGUI().setVisible(true);
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        painting.draw(e.getX(), e.getY());
-        painting.repaint();
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        painting.newPencilLine();
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }
